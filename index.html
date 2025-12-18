@@ -1,129 +1,315 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prime FC - Official Team Site</title>
+    <title>Prime FC - Личный кабинет</title>
     <style>
-        /* Color Variables based on your Logo */
+        /* --- НАСТРОЙКИ ДИЗАЙНА --- */
         :root {
-            --primary-red: #C62026;  /* Deep Red from shield */
-            --primary-gold: #C69C4E; /* Gold from Lion */
-            --bg-black: #0d0d0d;     /* Dark background */
+            --primary-red: #D32F2F;
+            --primary-gold: #C69C4E;
+            --bg-black: #121212;
+            --card-bg: #1e1e1e;
             --text-white: #ffffff;
         }
+
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
             background-color: var(--bg-black);
             color: var(--text-white);
-            text-align: center;
+            overflow-x: hidden;
         }
 
-        /* Navbar */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            background-color: rgba(0,0,0,0.8);
-        }
-
-        .logo-text {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--text-white);
-            letter-spacing: 2px;
-        }
-
-        .nav-links a {
-            color: var(--text-white);
-            text-decoration: none;
-            margin-left: 20px;
-            font-size: 14px;
-            text-transform: uppercase;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 90vh;
+        /* --- ЭКРАН ВХОДА (LOGIN) --- */
+        #login-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #2a0a0b 0%, #000 90%);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle at center, #2a0a0b 0%, var(--bg-black) 70%);
+            z-index: 1000;
         }
 
-        .hero-logo {
-            max-width: 200px;
-            margin-bottom: 30px;
-            /* Placeholder for your logo image */
+        .login-box {
+            background: rgba(30, 30, 30, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid var(--primary-gold);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 20px rgba(198, 156, 78, 0.3);
         }
 
-        h1 {
-            font-size: 48px;
-            margin: 0 0 20px 0;
-            text-transform: uppercase;
+        .login-logo {
+            width: 100px;
+            margin-bottom: 20px;
+            border-radius: 50%; /* Если лого квадратное, это сделает его круглым, можно убрать */
         }
 
-        p.slogan {
-            font-size: 24px;
-            color: var(--primary-gold);
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        p.description {
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: #333;
+            border: 1px solid #555;
+            color: white;
+            border-radius: 5px;
             font-size: 16px;
-            color: #cccccc;
-            max-width: 600px;
-            margin-bottom: 40px;
-            line-height: 1.5;
         }
 
-        /* Button Styling */
-        .join-btn {
+        input:focus { outline: none; border-color: var(--primary-gold); }
+
+        .login-btn {
             background-color: var(--primary-gold);
-            color: var(--bg-black);
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: bold;
+            color: #000;
+            width: 100%;
+            padding: 12px;
             border: none;
             border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
-            text-transform: uppercase;
-            transition: transform 0.2s, background 0.2s;
+            margin-top: 10px;
+            transition: 0.3s;
         }
 
-        .join-btn:hover {
-            transform: scale(1.05);
-            background-color: #e5b65e;
+        .login-btn:hover { background-color: #e5b65e; }
+
+        /* --- ОСНОВНОЙ САЙТ (Скрыт до входа) --- */
+        #main-site { display: none; }
+
+        /* Навигация */
+        nav {
+            padding: 15px 20px;
+            background-color: rgba(0,0,0,0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-gold);
+            font-weight: bold;
+        }
+
+        .avatar {
+            width: 35px; height: 35px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .logout-btn {
+            font-size: 12px;
+            color: #888;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Секции */
+        .hero {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, #1a0505, var(--bg-black));
+        }
+
+        h1 { color: white; text-transform: uppercase; margin: 10px 0; }
+        .slogan { color: var(--primary-gold); font-style: italic; }
+
+        .section-title {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 28px;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--primary-red);
+            display: inline-block;
+            padding-bottom: 5px;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Сетка игроков */
+        .roster-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .player-card {
+            background: var(--card-bg);
+            width: 160px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-top: 3px solid var(--primary-gold);
+        }
+
+        .p-num {
+            font-size: 30px; font-weight: bold; color: var(--primary-gold);
+            margin-bottom: 5px;
+        }
+        .p-name { font-weight: bold; font-size: 18px; }
+        .p-pos { font-size: 12px; color: #aaa; text-transform: uppercase; margin-top: 5px;}
+
+        /* Таблица матчей */
+        .matches-container {
+            max-width: 600px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+        }
+
+        .match-row {
+            background: #222;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .score {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-gold);
+            background: #000;
+            padding: 5px 10px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo-text">PRIME FC</div>
-        <div class="nav-links">
-            <a href="#team">Команда</a>
-            <a href="#matches">Матчи</a>
-            <a href="#join">Вступить</a>
+    <div id="login-screen">
+        <div class="login-box">
+            <img src="logo.jpg" alt="Prime FC Logo" class="login-logo">
+            <h2>Вход в клуб</h2>
+            <p style="color:#aaa; font-size: 14px;">Введите ваше имя игрока или фаната</p>
+            
+            <input type="text" id="username" placeholder="Ваше имя (например, Hasanov)">
+            <input type="password" id="password" placeholder="Пароль (любой)">
+            
+            <button class="login-btn" onclick="login()">ВОЙТИ</button>
+            <p id="error-msg" style="color:red; display:none; margin-top:10px;">Введите имя!</p>
         </div>
-    </nav>
-
-    <div class="hero">
-        <img src="logo.jpg" alt="Prime FC Logo" class="hero-logo">
-        
-        <p class="slogan">Мы стремимся быть в своём прайме</p>
-        
-        <p class="description">
-            Prime FC — команда, основанная на вере, дисциплине и желании побеждать.
-        </p>
-
-        <button class="join-btn">Присоединиться</button>
     </div>
 
+    <div id="main-site">
+        <nav>
+            <div style="font-weight:bold; font-size:20px;">PRIME FC</div>
+            <div class="user-profile">
+                <div class="avatar" id="user-avatar">?</div>
+                <div>
+                    <span id="display-name">Гость</span><br>
+                    <span class="logout-btn" onclick="logout()">Выйти</span>
+                </div>
+            </div>
+        </nav>
+
+        <div class="hero">
+            <img src="logo.jpg" width="120" style="margin-bottom:20px;">
+            <h1>Добро пожаловать</h1>
+            <p class="slogan">"Мы стремимся быть в своём прайме"</p>
+        </div>
+
+        <h2 class="section-title">Состав Prime FC</h2>
+        <div class="roster-grid">
+            <div class="player-card">
+                <div class="p-num">7</div>
+                <div class="p-name">Hasanov</div>
+                <div class="p-pos">Нападающий</div>
+            </div>
+            <div class="player-card">
+                <div class="p-num">6</div>
+                <div class="p-name">Mehraj</div>
+                <div class="p-pos">Защитник</div>
+            </div>
+            <div class="player-card">
+                <div class="p-num">10</div>
+                <div class="p-name">Bashirov</div>
+                <div class="p-pos">Полузащитник</div>
+            </div>
+            <div class="player-card">
+                <div class="p-num">5</div>
+                <div class="p-name">Qafarzade</div>
+                <div class="p-pos">Защитник</div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Результаты</h2>
+        <div class="matches-container">
+            <div class="match-row">
+                <div>Prime FC vs Aura FC</div>
+                <div class="score">2 - 2</div>
+            </div>
+            <div class="match-row">
+                <div>Prime FC vs Aura FC</div>
+                <div class="score">1 - 4</div>
+            </div>
+            <div class="match-row">
+                <div>Prime FC vs Aura FC</div>
+                <div class="score">2 - 3</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Проверяем, входил ли пользователь раньше
+        window.onload = function() {
+            const savedUser = localStorage.getItem('primeUser');
+            if (savedUser) {
+                showSite(savedUser);
+            }
+        };
+
+        function login() {
+            const username = document.getElementById('username').value;
+            
+            if (username.trim() === "") {
+                document.getElementById('error-msg').style.display = 'block';
+                return;
+            }
+
+            // Сохраняем пользователя в памяти браузера
+            localStorage.setItem('primeUser', username);
+            showSite(username);
+        }
+
+        function showSite(name) {
+            // Скрываем вход, показываем сайт
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('main-site').style.display = 'block';
+            
+            // Обновляем данные профиля
+            document.getElementById('display-name').innerText = name;
+            document.getElementById('user-avatar').innerText = name.charAt(0).toUpperCase();
+        }
+
+        function logout() {
+            localStorage.removeItem('primeUser');
+            location.reload(); // Перезагружаем страницу
+        }
+    </script>
 </body>
 </html>
