@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime FC - Official Team Site</title>
+    <style>
+        /* Color Variables based on your Logo */
+        :root {
+            --primary-red: #C62026;  /* Deep Red from shield */
+            --primary-gold: #C69C4E; /* Gold from Lion */
+            --bg-black: #0d0d0d;     /* Dark background */
+            --text-white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            text-align: center;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-white);
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #2a0a0b 0%, var(--bg-black) 70%);
+        }
+
+        .hero-logo {
+            max-width: 200px;
+            margin-bottom: 30px;
+            /* Placeholder for your logo image */
+        }
+
+        h1 {
+            font-size: 48px;
+            margin: 0 0 20px 0;
+            text-transform: uppercase;
+        }
+
+        p.slogan {
+            font-size: 24px;
+            color: var(--primary-gold);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        p.description {
+            font-size: 16px;
+            color: #cccccc;
+            max-width: 600px;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        /* Button Styling */
+        .join-btn {
+            background-color: var(--primary-gold);
+            color: var(--bg-black);
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .join-btn:hover {
+            transform: scale(1.05);
+            background-color: #e5b65e;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-text">PRIME FC</div>
+        <div class="nav-links">
+            <a href="#team">Команда</a>
+            <a href="#matches">Матчи</a>
+            <a href="#join">Вступить</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <img src="logo.jpg" alt="Prime FC Logo" class="hero-logo">
+        
+        <p class="slogan">Мы стремимся быть в своём прайме</p>
+        
+        <p class="description">
+            Prime FC — команда, основанная на вере, дисциплине и желании побеждать.
+        </p>
+
+        <button class="join-btn">Присоединиться</button>
+    </div>
+
+</body>
+</html>
