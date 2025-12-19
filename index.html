@@ -12,6 +12,7 @@
             --black: #050505;
             --card-bg: #111111;
             --white: #ffffff;
+            --gold: #ffd700;
         }
 
         * { box-sizing: border-box; cursor: crosshair; }
@@ -25,7 +26,6 @@
             scroll-behavior: smooth;
         }
 
-        /* АНИМАЦИЯ ФОНА */
         body::before {
             content: "";
             position: fixed;
@@ -41,7 +41,6 @@
             100% { opacity: 1; }
         }
 
-        /* НАВИГАЦИЯ */
         nav {
             padding: 20px 40px;
             display: flex;
@@ -74,7 +73,6 @@
 
         nav a:hover { color: var(--red); text-shadow: 0 0 10px var(--red); }
 
-        /* ГЛАВНЫЙ БЛОК (HERO) */
         .hero {
             padding: 100px 20px;
             text-align: center;
@@ -98,13 +96,28 @@
 
         .hero h1 {
             font-size: 60px;
-            margin: 20px 0;
+            margin: 20px 0 10px;
             text-transform: uppercase;
             letter-spacing: 8px;
             background: linear-gradient(to bottom, #fff 40%, var(--red) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: titleAppear 1.5s ease-out;
+        }
+
+        .star-rank {
+            color: var(--gold);
+            font-size: 24px;
+            filter: drop-shadow(0 0 10px var(--gold));
+            margin-bottom: 20px;
+        }
+
+        .foundation-date {
+            color: #666;
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
         }
 
         @keyframes titleAppear {
@@ -134,7 +147,6 @@
 
         .motto span { color: var(--red); font-weight: bold; }
 
-        /* КАРТОЧКИ ИГРОКОВ */
         .roster {
             display: flex;
             justify-content: center;
@@ -218,7 +230,6 @@
         .name { font-size: 20px; font-weight: bold; }
         .pos { font-size: 14px; color: #777; margin-top: 5px; text-transform: uppercase; }
 
-        /* МАТЧ */
         .section-title {
             text-align: center;
             font-size: 36px;
@@ -246,7 +257,14 @@
             text-shadow: 0 0 20px var(--red);
         }
 
-        /* ЧАТ */
+        .achievement-note {
+            font-size: 12px;
+            color: var(--gold);
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         .chat-box {
             max-width: 700px;
             margin: 50px auto 100px;
@@ -267,7 +285,6 @@
             background: #111; border: 1px solid #333; color: white; padding: 12px;
         }
 
-        /* МОДАЛЬНОЕ ОКНО */
         .modal {
             display:none; position:fixed; top:0; left:0;
             width:100%; height:100%; background:rgba(0,0,0,0.95);
@@ -304,6 +321,8 @@
 <div class="hero">
     <img src="logo.png" alt="Логотип Prime FC">
     <h1>PRIME FC</h1>
+    <div class="star-rank">★</div>
+    <div class="foundation-date">Est. 27.11.2025</div>
     <p class="slogan">Мы стремимся быть в своём прайме</p>
     <div class="motto">Forza <span>Prime</span>! | Sempre <span>Prime</span>!</div>
 </div>
@@ -348,8 +367,7 @@
             🎖️ 2-е место на «Золотом мяче» 23/24
         </div>
         <p><strong>Дата рождения:</strong> 01.12.2010</p>
-        <p><strong>Роль в клубе:</strong> Ключевой игрок (один из лидеров)</p>
-        <p><strong>Трансферный статус:</strong> ———</p>
+        <p><strong>Роль в клубе:</strong> Ключевой игрок (лидер команды)</p>
     </div>
 </div>
 
@@ -366,7 +384,7 @@
         </div>
         <p><strong>Дата рождения:</strong> 08.04.2011</p>
         <p><strong>Роль в клубе:</strong> Ключевой игрок</p>
-        <p><strong>Трансферный статус:</strong> В аренде (из Aura FC в Prime FC)</p>
+        <p><strong>Статус:</strong> В аренде (из Aura FC)</p>
     </div>
 </div>
 
@@ -378,6 +396,7 @@
         ⚽ Гол: <strong>Hasan Hasanov</strong><br>
         🅰️ Ассист: <strong>Mehraj Quluzade</strong>
     </p>
+    <div class="achievement-note">★ Звезда за ноябрь: Месяц без поражений</div>
 </div>
 
 <h2 id="kit" class="section-title">Игровая Форма</h2>
@@ -391,7 +410,7 @@
     <div class="chat-messages" id="messages"></div>
     <div class="chat-input">
         <input id="userName" placeholder="Имя" style="width: 120px;">
-        <input id="userText" placeholder="Введите сообщение..." style="flex: 1;">
+        <input id="userText" placeholder="Сообщение..." style="flex: 1;">
         <button onclick="send()" style="background:var(--red); border:none; color:white; padding:10px 25px; font-weight:bold; cursor:pointer;">ОТПРАВИТЬ</button>
     </div>
 </div>
@@ -420,7 +439,6 @@
         render();
     }
 
-    // Универсальные функции для модалок
     function openModal(id) { document.getElementById(id).style.display="flex"; }
     function closeModal(id) { document.getElementById(id).style.display="none"; }
     
