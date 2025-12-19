@@ -3,253 +3,287 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prime FC — Official Site</title>
+<title>Prime FC — Elite Vision</title>
 
 <style>
-:root{
-    --red:#C62026;
-    --black:#000000;
-    --dark:#0b0b0b;
-    --card:#151515;
-    --white:#ffffff;
+:root {
+    --red: #ff0000;
+    --dark-red: #8b0000;
+    --black: #050505;
+    --card-bg: #111111;
+    --white: #ffffff;
+    --glitch-speed: 0.3s;
 }
 
-*{box-sizing:border-box;}
+* { box-sizing: border-box; cursor: crosshair; }
 
-body{
-    margin:0;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background:var(--black);
-    color:var(--white);
+body {
+    margin: 0;
+    font-family: 'Orbitron', sans-serif; /* Для футуристичности можно подключить в Google Fonts */
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
     scroll-behavior: smooth;
 }
 
-/* NAV */
-nav{
-    padding:15px 30px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:rgba(0,0,0,.95);
-    border-bottom:2px solid var(--red);
-    position:sticky;
-    top:0;
-    z-index:100;
+/* BACKGROUND ANIMATION */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at 50% 50%, #200000 0%, #050505 100%);
+    z-index: -1;
+    animation: pulseBg 10s infinite alternate;
 }
 
-nav a{
-    color:white;
-    text-decoration:none;
-    margin-left:20px;
-    font-size:13px;
-    font-weight: bold;
-    text-transform:uppercase;
-    transition: 0.3s;
+@keyframes pulseBg {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
 }
 
-nav a:hover{ color: var(--red); }
-
-/* HERO */
-.hero{
-    padding:100px 20px;
-    text-align:center;
-    background: radial-gradient(circle at center, #3a0a0b 0%, #000 80%);
+/* NAVIGATION */
+nav {
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--red);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    animation: slideDown 0.8s ease;
 }
 
-.hero img{
-    width:160px;
-    margin-bottom:20px;
-    filter: drop-shadow(0 0 15px var(--red));
+@keyframes slideDown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
 }
 
-.hero h1{
-    font-size:50px;
-    margin:10px 0;
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 12px;
     letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: 0.4s;
+    position: relative;
 }
 
-.slogan{
-    color:var(--red);
-    font-size:22px;
-    font-weight: 300;
-    margin-bottom: 10px;
+nav a:hover { color: var(--red); text-shadow: 0 0 10px var(--red); }
+
+/* HERO SECTION */
+.hero {
+    padding: 120px 20px;
+    text-align: center;
+    position: relative;
+}
+
+.hero img {
+    width: 180px;
+    animation: logoFloat 4s ease-in-out infinite, logoGlow 2s infinite alternate;
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes logoGlow {
+    from { filter: drop-shadow(0 0 5px var(--red)); }
+    to { filter: drop-shadow(0 0 30px var(--red)); }
+}
+
+.hero h1 {
+    font-size: 70px;
+    margin: 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    background: linear-gradient(to bottom, #fff 30%, var(--red) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleAppear 1.5s ease-out;
+}
+
+@keyframes titleAppear {
+    from { opacity: 0; letter-spacing: 30px; filter: blur(10px); }
+    to { opacity: 1; letter-spacing: 10px; filter: blur(0); }
+}
+
+.slogan {
+    color: var(--red);
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
 }
 
 .motto {
-    font-size: 18px;
-    font-weight: bold;
-    font-style: italic;
-    letter-spacing: 1px;
-    color: #fff;
-    opacity: 0.8;
+    margin-top: 15px;
+    font-size: 20px;
+    color: #555;
+    transition: 0.5s;
 }
 
-.motto span { color: var(--red); }
+.motto:hover { color: #fff; transform: scale(1.1); }
 
-/* SECTION TITLES */
-.section-title{
-    text-align:center;
-    margin:60px auto 30px;
-    font-size:32px;
-    text-transform: uppercase;
-    border-bottom:3px solid var(--red);
-    width:fit-content;
-    padding-bottom:10px;
+/* ROSTER CARD ANIMATIONS */
+.roster {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 50px 20px;
 }
 
-/* PLAYERS */
-.roster{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:20px;
-    padding:20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.player{
-    width:210px;
-    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
-    padding:25px;
-    border-radius:15px;
+.player {
+    width: 240px;
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 0; /* Острые края выглядят агрессивнее/стильнее */
     border: 1px solid #222;
-    border-top:4px solid var(--red);
-    text-align:center;
-    transition:.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    transition: 0.5s;
     opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.6s forwards;
+    animation: cardIn 0.8s forwards;
 }
 
-@keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
+@keyframes cardIn {
+    to { opacity: 1; transform: scale(1); }
 }
 
-.player:hover{
-    transform: translateY(-10px);
-    box-shadow: 0 10px 25px rgba(198,32,38,0.3);
-    border-color: var(--red);
+.player::before {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(transparent, transparent, transparent, var(--red));
+    animation: rotateBorder 4s linear infinite;
+    z-index: 1;
 }
 
-.num{
-    font-size:38px;
-    color:var(--red);
-    font-weight:900;
-    margin-bottom: 5px;
+.player::after {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    background: var(--card-bg);
+    z-index: 2;
 }
 
-.name{
-    font-size:18px;
-    font-weight:bold;
+@keyframes rotateBorder {
+    100% { transform: rotate(360deg); }
 }
 
-.pos{
-    font-size:13px;
-    color:#888;
-    margin-top:5px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.player > * { position: relative; z-index: 3; }
+
+.player:hover {
+    transform: translateY(-15px) rotateX(10deg);
+    box-shadow: 0 20px 40px rgba(255,0,0,0.2);
 }
 
-/* MATCH */
-.matches{
-    max-width:700px;
-    margin:0 auto 60px;
-    padding:0 20px;
+.num {
+    font-size: 50px;
+    color: var(--red);
+    font-weight: 900;
+    font-style: italic;
 }
 
-.match{
-    background:#111;
-    padding:25px;
-    border-radius:15px;
-    border-left:5px solid var(--red);
-    text-align:center;
+/* MATCH SECTION */
+.match {
+    max-width: 800px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, #000, #1a0000, #000);
+    padding: 40px;
+    border-top: 2px solid var(--red);
+    border-bottom: 2px solid var(--red);
+    text-align: center;
+    animation: scanLine 4s linear infinite;
 }
 
-.score{
-    font-size:32px;
-    color:var(--red);
-    font-weight:bold;
-    margin:15px 0;
+@keyframes scanLine {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100px; }
 }
 
-/* CHAT */
-.chat-box{
-    max-width:700px;
-    margin:40px auto 80px;
-    background:var(--card);
-    border-radius:15px;
-    padding:20px;
-    border: 1px solid #222;
+/* CHAT BOX STYLES */
+.chat-box {
+    max-width: 700px;
+    margin: 50px auto;
+    border: 1px solid var(--red);
+    padding: 20px;
+    background: rgba(255,0,0,0.05);
 }
 
-.chat-messages{
-    height:300px;
-    overflow-y:auto;
-    background:#050505;
-    padding:15px;
-    border-radius:10px;
-    margin-bottom:15px;
+.chat-messages {
+    height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
-.msg{ margin-bottom:10px; border-bottom: 1px solid #111; padding-bottom: 5px; }
-.msg span{ color:var(--red); font-weight:bold; }
+.chat-messages::-webkit-scrollbar { width: 5px; }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--red); }
 
-.chat-input{ display:flex; gap:10px; }
-.chat-input input{
-    flex:1; padding:12px; border-radius:8px; border:none;
-    background:#222; color:white;
-}
-.chat-input button{
-    padding:10px 25px; background:var(--red); color:white;
-    border:none; border-radius:8px; font-weight:bold; cursor:pointer;
-}
-
-/* MODAL */
+/* MODAL STYLING */
 #hasanModal {
     display:none; position:fixed; top:0; left:0;
-    width:100%; height:100%; background:rgba(0,0,0,0.9);
-    z-index:1000; align-items:center; justify-content:center;
+    width:100%; height:100%; background:rgba(0,0,0,0.95);
+    z-index:9999; align-items:center; justify-content:center;
 }
+
 .modal-content {
-    background:#111; max-width:500px; width:90%; padding:30px;
-    border-radius:15px; border:2px solid var(--red); color:white;
-    position:relative; box-shadow: 0 0 30px var(--red);
-    line-height: 1.6;
+    background:#000; width:90%; max-width:500px; padding:40px;
+    border: 1px solid var(--red);
+    position:relative;
+    animation: modalSlide 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
-.captain{ cursor:pointer; }
-.cap-badge{ color:var(--red); font-weight:bold; }
+@keyframes modalSlide {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
 
-.modal-content h2 { margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 10px; }
-.modal-content p { margin: 10px 0; font-size: 15px; }
-.achievements { background: #1a1a1a; padding: 10px; border-radius: 8px; margin-top: 5px; border-left: 3px solid var(--red); }
+/* UTILS */
+.section-title {
+    text-align: center;
+    font-size: 40px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin: 80px 0 40px;
+}
+
 </style>
 </head>
 
 <body>
 
 <nav>
-    <strong style="font-size: 20px; color: var(--red);">PRIME FC</strong>
+    <strong style="color: var(--red); font-size: 24px;">PRIME FC</strong>
     <div>
-        <a href="#team">Команда</a>
-        <a href="#match">Матч</a>
-        <a href="#kit">Форма</a>
-        <a href="#chat">Чат</a>
+        <a href="#team">ROSTER</a>
+        <a href="#match">LAST MATCH</a>
+        <a href="#kit">KIT</a>
+        <a href="#chat">COMMUNITY</a>
     </div>
 </nav>
 
 <div class="hero">
-    <img src="logo.png" alt="Logo">
+    <img src="logo.png" alt="Prime FC Logo">
     <h1>PRIME FC</h1>
-    <p class="slogan">МЫ В СВОЁМ ПРАЙМЕ</p>
-    <div class="motto">
-        Forza <span>Prime</span>! &nbsp; Sempre <span>Prime</span>!
-    </div>
+    <p class="slogan">We Are In Our Prime</p>
+    <div class="motto">Forza <span>Prime</span>! | Sempre <span>Prime</span>!</div>
 </div>
 
-<h2 id="team" class="section-title">Состав Команды</h2>
+<h2 id="team" class="section-title">Squad List</h2>
 <div class="roster">
     <div class="player" style="animation-delay: 0.1s;">
         <div class="num">42</div>
@@ -271,84 +305,77 @@ nav a:hover{ color: var(--red); }
 
     <div class="player captain" style="animation-delay: 0.4s;" onclick="openHasan()">
         <div class="num">7</div>
-        <div class="name">Hasan Hasanov <span class="cap-badge">©</span></div>
-        <div class="pos">Нападающий</div>
+        <div class="name">Hasan Hasanov <span style="color:var(--red)">©</span></div>
+        <div class="pos">Нападающий / Вратарь</div>
     </div>
 </div>
 
-<h2 id="match" class="section-title">Последний результат</h2>
-<div class="matches">
-    <div class="match">
-        <div style="font-size: 14px; color: #888; margin-bottom: 5px;">ТОВАРИЩЕСКИЙ МАТЧ</div>
-        <strong style="font-size: 20px;">Prime FC vs Aura FC</strong>
-        <div class="score">1 : 1</div>
-        <p style="color:#aaa;">
-            ⚽ Hasan Hasanov (Prime FC)<br>
-            🅰️ Mehraj Quluzade
-        </p>
-    </div>
+<h2 id="match" class="section-title">Match Report</h2>
+<div class="match">
+    <div style="color: var(--red); letter-spacing: 5px;">RESULT</div>
+    <h2 style="font-size: 35px;">Prime FC <span style="color:var(--red)">1 : 1</span> Aura FC</h2>
+    <p style="font-size: 18px; color: #888;">
+        Scorer: Hasan Hasanov<br>
+        Assist: Mehraj Quluzade
+    </p>
 </div>
 
-<h2 id="kit" class="section-title">Экипировка</h2>
-<div class="kit" style="text-align: center; margin-bottom: 60px;">
-    <img src="kit-home.png" alt="Kit" style="width: 260px;">
-    <p style="color:#aaa; font-style: italic; margin-top: 15px;">Домашний комплект 2024/25</p>
+<h2 id="kit" class="section-title">Official Kit</h2>
+<div style="text-align:center; padding-bottom:100px;">
+    <img src="kit-home.png" alt="Home Kit" style="width:300px; filter: drop-shadow(0 0 50px rgba(255,0,0,0.3));">
 </div>
 
-<h2 id="chat" class="section-title">Фан-Зона</h2>
+<h2 id="chat" class="section-title">Fan Chat</h2>
 <div class="chat-box">
     <div class="chat-messages" id="messages"></div>
-    <div class="chat-input">
-        <input id="userName" placeholder="Ваше имя">
-        <input id="userText" placeholder="Напишите сообщение...">
-        <button onclick="send()">></button>
+    <div class="chat-input" style="display:flex; gap:10px; margin-top:15px;">
+        <input id="userName" placeholder="NAME" style="background:#111; border:1px solid #333; color:white; padding:10px; width:100px;">
+        <input id="userText" placeholder="TYPE MESSAGE..." style="background:#111; border:1px solid #333; color:white; padding:10px; flex:1;">
+        <button onclick="send()" style="background:var(--red); border:none; color:white; padding:10px 20px; font-weight:bold;">SEND</button>
     </div>
 </div>
 
 <div id="hasanModal">
     <div class="modal-content">
-        <span onclick="closeHasan()" style="position:absolute; top:15px; right:20px; cursor:pointer; font-size:24px; color:#aaa;">✕</span>
-        <h2 style="text-align:center;">Hasan Hasanov <span style="color:var(--red);">©</span></h2>
-        
+        <span onclick="closeHasan()" style="position:absolute; top:20px; right:20px; font-size:30px; color:var(--red); cursor:pointer;">×</span>
+        <h2 style="color:var(--red); text-transform:uppercase;">Hasan Hasanov</h2>
         <p><strong>Позиции:</strong> Нападающий, Вратарь</p>
-        
-        <p><strong>Достижения в прошлых сезонах:</strong></p>
-        <div class="achievements">
-            — Бомбардир лиги сезона 24/25 (33 гола)<br>
-            — Лучший ассистент лиги (12 ассистов)<br>
-            — 2-е место в голосовании на «Золотой мяч» 23/24
+        <div style="background:#111; padding:15px; border-left:4px solid var(--red); margin:20px 0;">
+            <strong>Достижения:</strong><br>
+            🏆 Бомбардир сезона 24/25 (33 гола)<br>
+            🎯 Лучший ассистент лиги (12 ассистов)<br>
+            🎖️ 2 место на «Золотом мяче» 23/24
         </div>
-
         <p><strong>Дата рождения:</strong> 01.12.2010</p>
-        <p><strong>Роль в клубе:</strong> Ключевая роль (один из лидеров команды)</p>
-        <p><strong>Трансферный статус:</strong> ———</p>
+        <p><strong>Роль:</strong> Ключевая роль (один из лидеров команды)</p>
+        <p><strong>Статус:</strong> Не продается (——)</p>
     </div>
 </div>
 
 <script>
-const box = document.getElementById("messages");
-let chat = JSON.parse(localStorage.getItem("primeChat")) || [];
+    const box = document.getElementById("messages");
+    let chat = JSON.parse(localStorage.getItem("primeChat")) || [];
 
-function render() {
-    box.innerHTML = chat.map(m => `<div class="msg"><span>${m.name}:</span> ${m.text}</div>`).join('');
-    box.scrollTop = box.scrollHeight;
-}
+    function render() {
+        box.innerHTML = chat.map(m => `<div style="margin-bottom:10px;"><strong style="color:red">${m.name}:</strong> ${m.text}</div>`).join('');
+        box.scrollTop = box.scrollHeight;
+    }
 
-function send() {
-    const n = document.getElementById("userName");
-    const t = document.getElementById("userText");
-    if(!t.value) return;
-    chat.push({name: n.value || "Fan", text: t.value});
-    localStorage.setItem("primeChat", JSON.stringify(chat));
-    t.value = "";
+    function send() {
+        const n = document.getElementById("userName");
+        const t = document.getElementById("userText");
+        if(!t.value) return;
+        chat.push({name: n.value || "FAN", text: t.value});
+        localStorage.setItem("primeChat", JSON.stringify(chat));
+        t.value = "";
+        render();
+    }
+
+    function openHasan() { document.getElementById("hasanModal").style.display="flex"; }
+    function closeHasan() { document.getElementById("hasanModal").style.display="none"; }
+    window.onclick = function(e) { if(e.target == document.getElementById("hasanModal")) closeHasan(); }
+
     render();
-}
-
-function openHasan() { document.getElementById("hasanModal").style.display="flex"; }
-function closeHasan() { document.getElementById("hasanModal").style.display="none"; }
-window.onclick = function(e) { if(e.target == document.getElementById("hasanModal")) closeHasan(); }
-
-render();
 </script>
 
 </body>
