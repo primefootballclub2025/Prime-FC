@@ -1,266 +1,242 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prime FC — Official Site</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime FC — Official Site</title>
 
-<style>
-:root{
-    --red:#C62026;
-    --black:#000000;
-    --dark:#0b0b0b;
-    --card:#151515;
-    --white:#ffffff;
-}
+    <style>
+        :root {
+            --red: #C62026;
+            --black: #000000;
+            --dark: #0b0b0b;
+            --card: #151515;
+            --white: #ffffff;
+        }
 
-*{box-sizing:border-box;}
-<div id="hasanModal" style="
-display:none;
-position:fixed;
-top:0; left:0;
-width:100%; height:100%;
-background:rgba(0,0,0,0.85);
-z-index:1000;
-align-items:center;
-justify-content:center;
-">
+        * { box-sizing: border-box; }
 
-<div style="
-background:#111;
-max-width:500px;
-padding:25px;
-border-radius:12px;
-border:2px solid var(--red);
-color:white;
-position:relative;
-">
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            scroll-behavior: smooth;
+        }
 
-<span onclick="closeHasan()" style="
-position:absolute;
-top:10px;
-right:15px;
-cursor:pointer;
-font-size:20px;
-color:#aaa;
-">✕</span>
+        /* NAV */
+        nav {
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, .95);
+            border-bottom: 2px solid var(--red);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-<h2 style="text-align:center;margin-bottom:10px;">
-Hasan Hasanov <span style="color:var(--red);">© Капитан</span>
-</h2>
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
 
-<p><strong>Позиции:</strong> Нападающий, Вратарь</p>
+        /* HERO */
+        .hero {
+            padding: 90px 20px;
+            text-align: center;
+            background: radial-gradient(circle, #2a0a0b 0%, #000 75%);
+        }
 
-<p><strong>Достижения:</strong><br>
-— Бомбардир лиги сезона 24/25 (33 гола)<br>
-— Лучший ассистент лиги (12 ассистов)<br>
-— 2-е место в голосовании на «Золотой мяч» 23/24
-</p>
+        .hero img {
+            width: 180px;
+            margin-bottom: 20px;
+        }
 
-<p><strong>Дата рождения:</strong> 01.12.2010</p>
+        .hero h1 {
+            font-size: 44px;
+            margin: 10px 0;
+        }
 
-<p><strong>Роль в клубе:</strong> ключевая — один из лидеров команды</p>
+        .slogan {
+            color: var(--red);
+            font-size: 20px;
+        }
 
-<p><strong>Трансферный статус:</strong> ———</p>
+        /* TITLES */
+        .section-title {
+            text-align: center;
+            margin: 60px auto 30px;
+            font-size: 28px;
+            border-bottom: 2px solid var(--red);
+            width: fit-content;
+            padding-bottom: 6px;
+        }
 
-</div>
-</div>
+        /* PLAYERS */
+        .roster {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 18px;
+            padding: 20px;
+        }
 
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:var(--black);
-    color:var(--white);
-}
+        .player {
+            width: 190px;
+            background: var(--card);
+            padding: 22px;
+            border-radius: 10px;
+            border-top: 3px solid var(--red);
+            text-align: center;
+            transition: .3s;
+        }
 
-/* NAV */
-nav{
-    padding:15px 30px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:rgba(0,0,0,.95);
-    border-bottom:2px solid var(--red);
-    position:sticky;
-    top:0;
-    z-index:100;
-}
+        .player:hover {
+            transform: translateY(-6px) scale(1.05);
+        }
 
-nav a{
-    color:white;
-    text-decoration:none;
-    margin-left:20px;
-    font-size:14px;
-    text-transform:uppercase;
-}
+        .num {
+            font-size: 32px;
+            color: var(--red);
+            font-weight: bold;
+        }
 
-/* HERO */
-.hero{
-    padding:90px 20px;
-    text-align:center;
-    background:radial-gradient(circle,#2a0a0b 0%,#000 75%);
-}
+        .name {
+            font-size: 17px;
+            font-weight: bold;
+            margin-top: 6px;
+        }
 
-.hero img{
-    width:180px;
-    margin-bottom:20px;
-}
+        .pos {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 4px;
+        }
 
-.hero h1{
-    font-size:44px;
-    margin:10px 0;
-}
+        .captain {
+            box-shadow: 0 0 15px rgba(198, 32, 38, 0.4);
+            cursor: pointer;
+        }
 
-.slogan{
-    color:var(--red);
-    font-size:20px;
-}
+        .cap-badge {
+            color: var(--red);
+            font-weight: bold;
+            margin-left: 4px;
+        }
 
-/* TITLES */
-.section-title{
-    text-align:center;
-    margin:60px auto 30px;
-    font-size:28px;
-    border-bottom:2px solid var(--red);
-    width:fit-content;
-    padding-bottom:6px;
-}
+        /* MATCH */
+        .matches {
+            max-width: 700px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
 
-/* PLAYERS */
-.roster{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:18px;
-    padding:20px;
-}
+        .match {
+            background: #111;
+            padding: 18px;
+            border-radius: 10px;
+            border-left: 4px solid var(--red);
+            text-align: center;
+        }
 
-.player{
-    width:190px;
-    background:var(--card);
-    padding:22px;
-    border-radius:10px;
-    border-top:3px solid var(--red);
-    text-align:center;
-    transition:.3s;
-}
+        .score {
+            font-size: 26px;
+            color: var(--red);
+            font-weight: bold;
+            margin: 10px 0;
+        }
 
-.player:hover{
-    transform:translateY(-6px) scale(1.05);
-}
+        /* KIT */
+        .kit {
+            text-align: center;
+            margin-bottom: 70px;
+        }
 
-.num{
-    font-size:32px;
-    color:var(--red);
-    font-weight:bold;
-}
+        .kit img {
+            width: 260px;
+            filter: drop-shadow(0 20px 35px rgba(0,0,0,.9));
+        }
 
-.name{
-    font-size:17px;
-    font-weight:bold;
-    margin-top:6px;
-}
+        /* CHAT */
+        .chat-box {
+            max-width: 700px;
+            margin: 40px auto 80px;
+            background: var(--card);
+            border-radius: 12px;
+            padding: 15px;
+        }
 
-.pos{
-    font-size:12px;
-    color:#aaa;
-    margin-top:4px;
-}
+        .chat-messages {
+            height: 260px;
+            overflow-y: auto;
+            background: #0a0a0a;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
 
-/* MATCH */
-.matches{
-    max-width:700px;
-    margin:0 auto 60px;
-    padding:0 20px;
-}
+        .msg {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
 
-.match{
-    background:#111;
-    padding:18px;
-    border-radius:10px;
-    border-left:4px solid var(--red);
-    text-align:center;
-}
+        .msg span {
+            color: var(--red);
+            font-weight: bold;
+        }
 
-.score{
-    font-size:26px;
-    color:var(--red);
-    font-weight:bold;
-    margin:10px 0;
-}
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
 
-/* KIT */
-.kit{
-    text-align:center;
-    margin-bottom:70px;
-}
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: #222;
+            color: white;
+        }
 
-.kit img{
-    width:260px;
-    filter:drop-shadow(0 20px 35px rgba(0,0,0,.9));
-}
+        .chat-input button {
+            padding: 10px 20px;
+            background: var(--red);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-/* CHAT */
-.chat-box{
-    max-width:700px;
-    margin:40px auto 80px;
-    background:var(--card);
-    border-radius:12px;
-    padding:15px;
-}
+        /* MODAL */
+        #hasanModal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
 
-.chat-messages{
-    height:260px;
-    overflow-y:auto;
-    background:#0a0a0a;
-    padding:10px;
-    border-radius:8px;
-    margin-bottom:10px;
-}
-
-.msg{
-    margin-bottom:8px;
-    font-size:14px;
-}
-
-.msg span{
-    color:var(--red);
-    font-weight:bold;
-}
-
-.chat-input{
-    display:flex;
-    gap:10px;
-}
-
-.chat-input input{
-    flex:1;
-    padding:10px;
-    border-radius:5px;
-    border:none;
-}
-
-.chat-input button{
-    padding:10px 20px;
-    background:var(--red);
-    color:white;
-    border:none;
-    border-radius:5px;
-    font-weight:bold;
-    cursor:pointer;
-}
-.captain{
-    border-top:3px solid var(--red);
-    box-shadow:0 0 15px rgba(198,32,38,0.6);
-    cursor:pointer;
-}
-
-.cap-badge{
-    color:var(--red);
-    font-weight:bold;
-    margin-left:4px;
-}
-</style>
+        .modal-content {
+            background: #111;
+            max-width: 500px;
+            width: 90%;
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid var(--red);
+            color: white;
+            position: relative;
+        }
+    </style>
 </head>
 
 <body>
@@ -276,22 +252,19 @@ nav a{
 </nav>
 
 <div class="hero">
-    <img src="logo.png">
+    <img src="logo.png" alt="Logo">
     <h1>PRIME FC</h1>
     <p class="slogan">Мы стремимся быть в своём прайме</p>
 </div>
 
 <h2 id="team" class="section-title">Состав Prime FC</h2>
 <div class="roster">
-
-    <!-- ЗАЩИТНИК -->
     <div class="player">
         <div class="num">42</div>
         <div class="name">Elton Qafarzade</div>
         <div class="pos">Защитник</div>
     </div>
 
-    <!-- ПОЛУЗАЩИТНИКИ -->
     <div class="player">
         <div class="num">8</div>
         <div class="name">Mehraj Quluzade</div>
@@ -304,7 +277,6 @@ nav a{
         <div class="pos">Полузащитник</div>
     </div>
 
-    <!-- НАПАДАЮЩИЙ / КАПИТАН -->
     <div class="player captain" onclick="openHasan()">
         <div class="num">7</div>
         <div class="name">
@@ -312,7 +284,6 @@ nav a{
         </div>
         <div class="pos">Нападающий</div>
     </div>
-
 </div>
 
 <h2 id="match" class="section-title">Последний матч</h2>
@@ -329,7 +300,7 @@ nav a{
 
 <h2 id="kit" class="section-title">Домашняя форма</h2>
 <div class="kit">
-    <img src="kit-home.png">
+    <img src="kit-home.png" alt="Home Kit">
     <p style="color:#aaa;">Домашняя форма Prime FC • Сезон 2025</p>
 </div>
 
@@ -337,44 +308,77 @@ nav a{
 <div class="chat-box">
     <div class="chat-messages" id="messages"></div>
     <div class="chat-input">
-        <input id="name" placeholder="Имя">
-        <input id="text" placeholder="Сообщение">
+        <input id="userName" placeholder="Имя">
+        <input id="userText" placeholder="Сообщение">
         <button onclick="send()">Отправить</button>
     </div>
 </div>
 
+<div id="hasanModal">
+    <div class="modal-content">
+        <span onclick="closeHasan()" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px; color:#aaa;">✕</span>
+        <h2 style="text-align:center; margin-bottom:10px;">
+            Hasan Hasanov <span style="color:var(--red);">© Капитан</span>
+        </h2>
+        <p><strong>Позиции:</strong> Нападающий, Вратарь</p>
+        <p><strong>Достижения:</strong><br>
+        — Бомбардир лиги сезона 24/25 (33 гола)<br>
+        — Лучший ассистент лиги 24/25 (12 ассистов)<br>
+        — 2-е место в голосовании на «Золотой мяч» 23/24</p>
+        <p><strong>Дата рождения:</strong> 01.12.2010</p>
+        <p><strong>Роль в клубе:</strong> ключевая — один из лидеров команды</p>
+        <p><strong>Трансферный статус:</strong> ———</p>
+    </div>
+</div>
+
 <script>
-const box=document.getElementById("messages");
-const chat=JSON.parse(localStorage.getItem("primeChat"))||[];
+    // --- ЧАТ ФУНКЦИИ ---
+    const box = document.getElementById("messages");
+    let chat = JSON.parse(localStorage.getItem("primeChat")) || [];
 
-function render(){
-    box.innerHTML="";
-    chat.forEach(m=>{
-        box.innerHTML+=`<div class="msg"><span>${m.name}:</span> ${m.text}</div>`;
-    });
-    box.scrollTop=box.scrollHeight;
-}
-render();
+    function render() {
+        box.innerHTML = "";
+        chat.forEach(m => {
+            box.innerHTML += `<div class="msg"><span>${m.name}:</span> ${m.text}</div>`;
+        });
+        box.scrollTop = box.scrollHeight;
+    }
 
-function send(){
-    const name=document.getElementById("name").value||"Гость";
-    const text=document.getElementById("text").value;
-    if(!text)return;
-    chat.push({name,text});
-    localStorage.setItem("primeChat",JSON.stringify(chat));
-    document.getElementById("text").value="";
+    function send() {
+        const nameInput = document.getElementById("userName");
+        const textInput = document.getElementById("userText");
+        
+        const name = nameInput.value || "Гость";
+        const text = textInput.value;
+
+        if (!text) return;
+
+        chat.push({ name, text });
+        localStorage.setItem("primeChat", JSON.stringify(chat));
+        textInput.value = "";
+        render();
+    }
+
+    // --- МОДАЛЬНОЕ ОКНО ---
+    function openHasan() {
+        document.getElementById("hasanModal").style.display = "flex";
+    }
+
+    function closeHasan() {
+        document.getElementById("hasanModal").style.display = "none";
+    }
+
+    // Закрытие по клику вне окна
+    window.onclick = function(event) {
+        let modal = document.getElementById("hasanModal");
+        if (event.target == modal) {
+            closeHasan();
+        }
+    }
+
+    // Инициализация чата при загрузке
     render();
-}
-<script>
-function openHasan(){
-    document.getElementById("hasanModal").style.display="flex";
-}
-
-function closeHasan(){
-    document.getElementById("hasanModal").style.display="none";
-}
 </script>
 
 </body>
 </html>
-
