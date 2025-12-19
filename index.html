@@ -75,7 +75,6 @@ nav a:hover{ color: var(--red); }
     margin-bottom: 10px;
 }
 
-/* НОВЫЕ ЛОЗУНГИ */
 .motto {
     font-size: 18px;
     font-weight: bold;
@@ -85,9 +84,7 @@ nav a:hover{ color: var(--red); }
     opacity: 0.8;
 }
 
-.motto span {
-    color: var(--red);
-}
+.motto span { color: var(--red); }
 
 /* SECTION TITLES */
 .section-title{
@@ -216,13 +213,18 @@ nav a:hover{ color: var(--red); }
     z-index:1000; align-items:center; justify-content:center;
 }
 .modal-content {
-    background:#111; max-width:450px; width:90%; padding:30px;
+    background:#111; max-width:500px; width:90%; padding:30px;
     border-radius:15px; border:2px solid var(--red); color:white;
     position:relative; box-shadow: 0 0 30px var(--red);
+    line-height: 1.6;
 }
 
 .captain{ cursor:pointer; }
 .cap-badge{ color:var(--red); font-weight:bold; }
+
+.modal-content h2 { margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 10px; }
+.modal-content p { margin: 10px 0; font-size: 15px; }
+.achievements { background: #1a1a1a; padding: 10px; border-radius: 8px; margin-top: 5px; border-left: 3px solid var(--red); }
 </style>
 </head>
 
@@ -305,13 +307,21 @@ nav a:hover{ color: var(--red); }
 
 <div id="hasanModal">
     <div class="modal-content">
-        <span onclick="closeHasan()" style="position:absolute; top:15px; right:20px; cursor:pointer; font-size:24px;">✕</span>
+        <span onclick="closeHasan()" style="position:absolute; top:15px; right:20px; cursor:pointer; font-size:24px; color:#aaa;">✕</span>
         <h2 style="text-align:center;">Hasan Hasanov <span style="color:var(--red);">©</span></h2>
-        <hr border="0" style="border-top:1px solid #333; margin: 15px 0;">
+        
         <p><strong>Позиции:</strong> Нападающий, Вратарь</p>
-        <p><strong>Голы в сезоне:</strong> 33</p>
-        <p><strong>Ассисты:</strong> 12</p>
-        <p><strong>Статус:</strong> Лидер команды</p>
+        
+        <p><strong>Достижения в прошлых сезонах:</strong></p>
+        <div class="achievements">
+            — Бомбардир лиги сезона 24/25 (33 гола)<br>
+            — Лучший ассистент лиги (12 ассистов)<br>
+            — 2-е место в голосовании на «Золотой мяч» 23/24
+        </div>
+
+        <p><strong>Дата рождения:</strong> 01.12.2010</p>
+        <p><strong>Роль в клубе:</strong> Ключевая роль (один из лидеров команды)</p>
+        <p><strong>Трансферный статус:</strong> ———</p>
     </div>
 </div>
 
