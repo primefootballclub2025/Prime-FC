@@ -1,248 +1,220 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prime FC — Official Site</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime FC — Official Site</title>
 
-    <style>
-        :root {
-            --red: #C62026;
-            --black: #000000;
-            --dark: #0b0b0b;
-            --card: #151515;
-            --white: #ffffff;
-        }
+<style>
+:root{
+    --red:#C62026;
+    --black:#000000;
+    --dark:#0b0b0b;
+    --card:#151515;
+    --white:#ffffff;
+}
 
-        * { box-sizing: border-box; }
+*{box-sizing:border-box;}
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: var(--black);
-            color: var(--white);
-            scroll-behavior: smooth;
-        }
+body{
+    margin:0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:var(--black);
+    color:var(--white);
+    scroll-behavior: smooth;
+}
 
-        /* NAV */
-        nav {
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0, 0, 0, .95);
-            border-bottom: 2px solid var(--red);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+/* NAV */
+nav{
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(0,0,0,.95);
+    border-bottom:2px solid var(--red);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            font-size: 14px;
-            text-transform: uppercase;
-        }
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-size:13px;
+    font-weight: bold;
+    text-transform:uppercase;
+    transition: 0.3s;
+}
 
-        /* HERO */
-        .hero {
-            padding: 90px 20px;
-            text-align: center;
-            background: radial-gradient(circle, #2a0a0b 0%, #000 75%);
-        }
+nav a:hover{ color: var(--red); }
 
-        .hero img {
-            width: 180px;
-            margin-bottom: 20px;
-        }
+/* HERO */
+.hero{
+    padding:100px 20px;
+    text-align:center;
+    background: radial-gradient(circle at center, #3a0a0b 0%, #000 80%);
+}
 
-        .hero h1 {
-            font-size: 44px;
-            margin: 10px 0;
-        }
+.hero img{
+    width:160px;
+    margin-bottom:20px;
+    filter: drop-shadow(0 0 15px var(--red));
+}
 
-        .slogan {
-            color: var(--red);
-            font-size: 20px;
-        }
+.hero h1{
+    font-size:50px;
+    margin:10px 0;
+    letter-spacing: 2px;
+}
 
-        /* TITLES */
-        .section-title {
-            text-align: center;
-            margin: 60px auto 30px;
-            font-size: 28px;
-            border-bottom: 2px solid var(--red);
-            width: fit-content;
-            padding-bottom: 6px;
-        }
+.slogan{
+    color:var(--red);
+    font-size:22px;
+    font-weight: 300;
+}
 
-        /* PLAYERS */
-        .roster {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 18px;
-            padding: 20px;
-        }
+/* SECTION TITLES */
+.section-title{
+    text-align:center;
+    margin:60px auto 30px;
+    font-size:32px;
+    text-transform: uppercase;
+    border-bottom:3px solid var(--red);
+    width:fit-content;
+    padding-bottom:10px;
+}
 
-        .player {
-            width: 190px;
-            background: var(--card);
-            padding: 22px;
-            border-radius: 10px;
-            border-top: 3px solid var(--red);
-            text-align: center;
-            transition: .3s;
-        }
+/* PLAYERS */
+.roster{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+    padding:20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-        .player:hover {
-            transform: translateY(-6px) scale(1.05);
-        }
+.player{
+    width:210px;
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+    padding:25px;
+    border-radius:15px;
+    border: 1px solid #222;
+    border-top:4px solid var(--red);
+    text-align:center;
+    transition:.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s forwards;
+}
 
-        .num {
-            font-size: 32px;
-            color: var(--red);
-            font-weight: bold;
-        }
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
 
-        .name {
-            font-size: 17px;
-            font-weight: bold;
-            margin-top: 6px;
-        }
+.player:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(198,32,38,0.3);
+    border-color: var(--red);
+}
 
-        .pos {
-            font-size: 12px;
-            color: #aaa;
-            margin-top: 4px;
-        }
+.num{
+    font-size:38px;
+    color:var(--red);
+    font-weight:900;
+    margin-bottom: 5px;
+}
 
-        .captain {
-            box-shadow: 0 0 15px rgba(198, 32, 38, 0.4);
-            cursor: pointer;
-        }
+.name{
+    font-size:18px;
+    font-weight:bold;
+}
 
-        .cap-badge {
-            color: var(--red);
-            font-weight: bold;
-            margin-left: 4px;
-        }
+.pos{
+    font-size:13px;
+    color:#888;
+    margin-top:5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-        /* MATCH */
-        .matches {
-            max-width: 700px;
-            margin: 0 auto 60px;
-            padding: 0 20px;
-        }
+/* MATCH */
+.matches{
+    max-width:700px;
+    margin:0 auto 60px;
+    padding:0 20px;
+}
 
-        .match {
-            background: #111;
-            padding: 18px;
-            border-radius: 10px;
-            border-left: 4px solid var(--red);
-            text-align: center;
-        }
+.match{
+    background:#111;
+    padding:25px;
+    border-radius:15px;
+    border-left:5px solid var(--red);
+    text-align:center;
+}
 
-        .score {
-            font-size: 26px;
-            color: var(--red);
-            font-weight: bold;
-            margin: 10px 0;
-        }
+.score{
+    font-size:32px;
+    color:var(--red);
+    font-weight:bold;
+    margin:15px 0;
+}
 
-        /* KIT */
-        .kit {
-            text-align: center;
-            margin-bottom: 70px;
-        }
+/* CHAT */
+.chat-box{
+    max-width:700px;
+    margin:40px auto 80px;
+    background:var(--card);
+    border-radius:15px;
+    padding:20px;
+    border: 1px solid #222;
+}
 
-        .kit img {
-            width: 260px;
-            filter: drop-shadow(0 20px 35px rgba(0,0,0,.9));
-        }
+.chat-messages{
+    height:300px;
+    overflow-y:auto;
+    background:#050505;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
 
-        /* CHAT */
-        .chat-box {
-            max-width: 700px;
-            margin: 40px auto 80px;
-            background: var(--card);
-            border-radius: 12px;
-            padding: 15px;
-        }
+.msg{ margin-bottom:10px; border-bottom: 1px solid #111; padding-bottom: 5px; }
+.msg span{ color:var(--red); font-weight:bold; }
 
-        .chat-messages {
-            height: 260px;
-            overflow-y: auto;
-            background: #0a0a0a;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
+.chat-input{ display:flex; gap:10px; }
+.chat-input input{
+    flex:1; padding:12px; border-radius:8px; border:none;
+    background:#222; color:white;
+}
+.chat-input button{
+    padding:10px 25px; background:var(--red); color:white;
+    border:none; border-radius:8px; font-weight:bold; cursor:pointer;
+}
 
-        .msg {
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
+/* MODAL */
+#hasanModal {
+    display:none; position:fixed; top:0; left:0;
+    width:100%; height:100%; background:rgba(0,0,0,0.9);
+    z-index:1000; align-items:center; justify-content:center;
+}
+.modal-content {
+    background:#111; max-width:450px; width:90%; padding:30px;
+    border-radius:15px; border:2px solid var(--red); color:white;
+    position:relative; box-shadow: 0 0 30px var(--red);
+}
 
-        .msg span {
-            color: var(--red);
-            font-weight: bold;
-        }
-
-        .chat-input {
-            display: flex;
-            gap: 10px;
-        }
-
-        .chat-input input {
-            flex: 1;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            background: #222;
-            color: white;
-        }
-
-        .chat-input button {
-            padding: 10px 20px;
-            background: var(--red);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* MODAL */
-        #hasanModal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: #111;
-            max-width: 500px;
-            width: 90%;
-            padding: 25px;
-            border-radius: 12px;
-            border: 2px solid var(--red);
-            color: white;
-            position: relative;
-        }
-    </style>
+.captain{ cursor:pointer; }
+.cap-badge{ color:var(--red); font-weight:bold; }
+</style>
 </head>
 
 <body>
 
 <nav>
-    <strong>PRIME FC</strong>
+    <strong style="font-size: 20px; color: var(--red);">PRIME FC</strong>
     <div>
         <a href="#team">Команда</a>
         <a href="#match">Матч</a>
@@ -254,130 +226,101 @@
 <div class="hero">
     <img src="logo.png" alt="Logo">
     <h1>PRIME FC</h1>
-    <p class="slogan">Мы стремимся быть в своём прайме</p>
+    <p class="slogan">МЫ В СВОЁМ ПРАЙМЕ</p>
 </div>
 
-<h2 id="team" class="section-title">Состав Prime FC</h2>
+<h2 id="team" class="section-title">Состав Команды</h2>
 <div class="roster">
-    <div class="player">
+    <div class="player" style="animation-delay: 0.1s;">
         <div class="num">42</div>
         <div class="name">Elton Qafarzade</div>
         <div class="pos">Защитник</div>
     </div>
 
-    <div class="player">
+    <div class="player" style="animation-delay: 0.2s;">
         <div class="num">8</div>
         <div class="name">Mehraj Quluzade</div>
         <div class="pos">Полузащитник</div>
     </div>
 
-    <div class="player">
+    <div class="player" style="animation-delay: 0.3s;">
         <div class="num">10</div>
         <div class="name">Azer Bashirov</div>
         <div class="pos">Полузащитник</div>
     </div>
 
-    <div class="player captain" onclick="openHasan()">
+    <div class="player captain" style="animation-delay: 0.4s;" onclick="openHasan()">
         <div class="num">7</div>
-        <div class="name">
-            Hasan Hasanov <span class="cap-badge">©</span>
-        </div>
+        <div class="name">Hasan Hasanov <span class="cap-badge">©</span></div>
         <div class="pos">Нападающий</div>
     </div>
 </div>
 
-<h2 id="match" class="section-title">Последний матч</h2>
+<h2 id="match" class="section-title">Последний результат</h2>
 <div class="matches">
     <div class="match">
-        <strong>Prime FC vs Aura FC</strong>
+        <div style="font-size: 14px; color: #888; margin-bottom: 5px;">ТОВАРИЩЕСКИЙ МАТЧ</div>
+        <strong style="font-size: 20px;">Prime FC vs Aura FC</strong>
         <div class="score">1 : 1</div>
         <p style="color:#aaa;">
-            Голы: Hasan Hasanov (Prime FC), Elton Qafarzade (автогол)<br>
-            Ассист: Mehraj Quluzade → Hasan Hasanov
+            ⚽ Hasan Hasanov (Prime FC)<br>
+            🅰️ Mehraj Quluzade
         </p>
     </div>
 </div>
 
-<h2 id="kit" class="section-title">Домашняя форма</h2>
-<div class="kit">
-    <img src="kit-home.png" alt="Home Kit">
-    <p style="color:#aaa;">Домашняя форма Prime FC • Сезон 2025</p>
+<h2 id="kit" class="section-title">Экипировка</h2>
+<div class="kit" style="text-align: center; margin-bottom: 60px;">
+    <img src="kit-home.png" alt="Kit" style="width: 260px;">
+    <p style="color:#aaa; font-style: italic; margin-top: 15px;">Домашний комплект 2024/25</p>
 </div>
 
-<h2 id="chat" class="section-title">Чат Prime FC</h2>
+<h2 id="chat" class="section-title">Фан-Зона</h2>
 <div class="chat-box">
     <div class="chat-messages" id="messages"></div>
     <div class="chat-input">
-        <input id="userName" placeholder="Имя">
-        <input id="userText" placeholder="Сообщение">
-        <button onclick="send()">Отправить</button>
+        <input id="userName" placeholder="Ваше имя">
+        <input id="userText" placeholder="Напишите сообщение...">
+        <button onclick="send()">></button>
     </div>
 </div>
 
 <div id="hasanModal">
     <div class="modal-content">
-        <span onclick="closeHasan()" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px; color:#aaa;">✕</span>
-        <h2 style="text-align:center; margin-bottom:10px;">
-            Hasan Hasanov <span style="color:var(--red);">© Капитан</span>
-        </h2>
+        <span onclick="closeHasan()" style="position:absolute; top:15px; right:20px; cursor:pointer; font-size:24px;">✕</span>
+        <h2 style="text-align:center;">Hasan Hasanov <span style="color:var(--red);">©</span></h2>
+        <hr border="0" style="border-top:1px solid #333; margin: 15px 0;">
         <p><strong>Позиции:</strong> Нападающий, Вратарь</p>
-        <p><strong>Достижения:</strong><br>
-        — Бомбардир лиги сезона 24/25 (33 гола)<br>
-        — Лучший ассистент лиги 24/25 (12 ассистов)<br>
-        — 2-е место в голосовании на «Золотой мяч» 23/24</p>
-        <p><strong>Дата рождения:</strong> 01.12.2010</p>
-        <p><strong>Роль в клубе:</strong> ключевая — один из лидеров команды</p>
-        <p><strong>Трансферный статус:</strong> ———</p>
+        <p><strong>Голы в сезоне:</strong> 33</p>
+        <p><strong>Ассисты:</strong> 12</p>
+        <p><strong>Статус:</strong> Лидер команды</p>
     </div>
 </div>
 
 <script>
-    // --- ЧАТ ФУНКЦИИ ---
-    const box = document.getElementById("messages");
-    let chat = JSON.parse(localStorage.getItem("primeChat")) || [];
+const box = document.getElementById("messages");
+let chat = JSON.parse(localStorage.getItem("primeChat")) || [];
 
-    function render() {
-        box.innerHTML = "";
-        chat.forEach(m => {
-            box.innerHTML += `<div class="msg"><span>${m.name}:</span> ${m.text}</div>`;
-        });
-        box.scrollTop = box.scrollHeight;
-    }
+function render() {
+    box.innerHTML = chat.map(m => `<div class="msg"><span>${m.name}:</span> ${m.text}</div>`).join('');
+    box.scrollTop = box.scrollHeight;
+}
 
-    function send() {
-        const nameInput = document.getElementById("userName");
-        const textInput = document.getElementById("userText");
-        
-        const name = nameInput.value || "Гость";
-        const text = textInput.value;
-
-        if (!text) return;
-
-        chat.push({ name, text });
-        localStorage.setItem("primeChat", JSON.stringify(chat));
-        textInput.value = "";
-        render();
-    }
-
-    // --- МОДАЛЬНОЕ ОКНО ---
-    function openHasan() {
-        document.getElementById("hasanModal").style.display = "flex";
-    }
-
-    function closeHasan() {
-        document.getElementById("hasanModal").style.display = "none";
-    }
-
-    // Закрытие по клику вне окна
-    window.onclick = function(event) {
-        let modal = document.getElementById("hasanModal");
-        if (event.target == modal) {
-            closeHasan();
-        }
-    }
-
-    // Инициализация чата при загрузке
+function send() {
+    const n = document.getElementById("userName");
+    const t = document.getElementById("userText");
+    if(!t.value) return;
+    chat.push({name: n.value || "Fan", text: t.value});
+    localStorage.setItem("primeChat", JSON.stringify(chat));
+    t.value = "";
     render();
+}
+
+function openHasan() { document.getElementById("hasanModal").style.display="flex"; }
+function closeHasan() { document.getElementById("hasanModal").style.display="none"; }
+window.onclick = function(e) { if(e.target == document.getElementById("hasanModal")) closeHasan(); }
+
+render();
 </script>
 
 </body>
