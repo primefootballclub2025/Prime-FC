@@ -1,315 +1,278 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prime FC - Личный кабинет</title>
-    <style>
-        /* --- НАСТРОЙКИ ДИЗАЙНА --- */
-        :root {
-            --primary-red: #D32F2F;
-            --primary-gold: #C69C4E;
-            --bg-black: #121212;
-            --card-bg: #1e1e1e;
-            --text-white: #ffffff;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime FC — Official Site</title>
 
-        * { box-sizing: border-box; }
+<style>
+:root {
+    --red:#C62026;
+    --gold:#C69C4E;
+    --bg:#0d0d0d;
+    --card:#1e1e1e;
+    --white:#fff;
+}
 
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: var(--bg-black);
-            color: var(--text-white);
-            overflow-x: hidden;
-        }
+*{box-sizing:border-box;}
 
-        /* --- ЭКРАН ВХОДА (LOGIN) --- */
-        #login-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, #2a0a0b 0%, #000 90%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:var(--bg);
+    color:var(--white);
+}
 
-        .login-box {
-            background: rgba(30, 30, 30, 0.9);
-            padding: 40px;
-            border-radius: 15px;
-            border: 2px solid var(--primary-gold);
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 0 20px rgba(198, 156, 78, 0.3);
-        }
+/* NAV */
+nav{
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(0,0,0,.9);
+    border-bottom:1px solid #333;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
 
-        .login-logo {
-            width: 100px;
-            margin-bottom: 20px;
-            border-radius: 50%; /* Если лого квадратное, это сделает его круглым, можно убрать */
-        }
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-size:14px;
+    text-transform:uppercase;
+}
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background: #333;
-            border: 1px solid #555;
-            color: white;
-            border-radius: 5px;
-            font-size: 16px;
-        }
+/* HERO */
+.hero{
+    padding:90px 20px;
+    text-align:center;
+    background:radial-gradient(circle,#2a0a0b 0%,#000 70%);
+}
 
-        input:focus { outline: none; border-color: var(--primary-gold); }
+.hero img{
+    width:180px;
+    margin-bottom:20px;
+}
 
-        .login-btn {
-            background-color: var(--primary-gold);
-            color: #000;
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
+.hero h1{
+    font-size:42px;
+    margin:10px 0;
+}
 
-        .login-btn:hover { background-color: #e5b65e; }
+.slogan{
+    color:var(--gold);
+    font-size:20px;
+}
 
-        /* --- ОСНОВНОЙ САЙТ (Скрыт до входа) --- */
-        #main-site { display: none; }
+/* TITLES */
+.section-title{
+    text-align:center;
+    margin:60px 0 25px;
+    font-size:26px;
+    border-bottom:2px solid var(--red);
+    display:inline-block;
+    padding-bottom:5px;
+    position:relative;
+    left:50%;
+    transform:translateX(-50%);
+}
 
-        /* Навигация */
-        nav {
-            padding: 15px 20px;
-            background-color: rgba(0,0,0,0.9);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+/* PLAYERS */
+.roster{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+    padding:20px;
+}
 
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--primary-gold);
-            font-weight: bold;
-        }
+.player{
+    width:160px;
+    background:var(--card);
+    padding:20px;
+    border-radius:10px;
+    border-top:3px solid var(--gold);
+    text-align:center;
+    transition:.3s;
+}
 
-        .avatar {
-            width: 35px; height: 35px;
-            background: var(--primary-red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
+.player:hover{
+    transform:translateY(-6px) scale(1.05);
+}
 
-        .logout-btn {
-            font-size: 12px;
-            color: #888;
-            cursor: pointer;
-            text-decoration: underline;
-        }
+.num{font-size:30px;color:var(--gold);font-weight:bold;}
+.name{font-size:18px;font-weight:bold;}
+.pos{font-size:12px;color:#aaa;}
 
-        /* Секции */
-        .hero {
-            padding: 60px 20px;
-            text-align: center;
-            background: linear-gradient(to bottom, #1a0505, var(--bg-black));
-        }
+/* MATCHES */
+.matches{
+    max-width:600px;
+    margin:0 auto 50px;
+    padding:0 20px;
+}
 
-        h1 { color: white; text-transform: uppercase; margin: 10px 0; }
-        .slogan { color: var(--primary-gold); font-style: italic; }
+.match{
+    background:#222;
+    margin-bottom:10px;
+    padding:15px;
+    border-radius:8px;
+    display:flex;
+    justify-content:space-between;
+    border-left:4px solid var(--red);
+}
 
-        .section-title {
-            text-align: center;
-            margin: 40px 0 20px;
-            font-size: 28px;
-            text-transform: uppercase;
-            border-bottom: 2px solid var(--primary-red);
-            display: inline-block;
-            padding-bottom: 5px;
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+.score{
+    color:var(--gold);
+    font-weight:bold;
+}
 
-        /* Сетка игроков */
-        .roster-grid {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            padding: 20px;
-        }
+/* KIT */
+.kit{
+    text-align:center;
+    margin-bottom:70px;
+}
 
-        .player-card {
-            background: var(--card-bg);
-            width: 160px;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            border-top: 3px solid var(--primary-gold);
-        }
+.kit img{
+    width:260px;
+    filter:drop-shadow(0 20px 35px rgba(0,0,0,.8));
+}
 
-        .p-num {
-            font-size: 30px; font-weight: bold; color: var(--primary-gold);
-            margin-bottom: 5px;
-        }
-        .p-name { font-weight: bold; font-size: 18px; }
-        .p-pos { font-size: 12px; color: #aaa; text-transform: uppercase; margin-top: 5px;}
+/* CHAT */
+.chat-box{
+    max-width:700px;
+    margin:40px auto 80px;
+    background:var(--card);
+    border-radius:12px;
+    padding:15px;
+}
 
-        /* Таблица матчей */
-        .matches-container {
-            max-width: 600px;
-            margin: 0 auto 50px;
-            padding: 0 20px;
-        }
+.chat-messages{
+    height:260px;
+    overflow-y:auto;
+    background:#111;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:10px;
+}
 
-        .match-row {
-            background: #222;
-            margin-bottom: 10px;
-            padding: 15px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 4px solid var(--primary-red);
-        }
+.msg{margin-bottom:8px;font-size:14px;}
+.msg span{color:var(--gold);font-weight:bold;}
 
-        .score {
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--primary-gold);
-            background: #000;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-    </style>
+.chat-input{
+    display:flex;
+    gap:10px;
+}
+
+.chat-input input{
+    flex:1;
+    padding:10px;
+    border-radius:5px;
+    border:none;
+}
+
+.chat-input button{
+    padding:10px 20px;
+    background:var(--gold);
+    border:none;
+    border-radius:5px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* ANIMATIONS */
+.fade-up{
+    opacity:0;
+    transform:translateY(40px);
+    animation:fadeUp 1.1s ease forwards;
+}
+
+.delay1{animation-delay:.3s;}
+.delay2{animation-delay:.6s;}
+.delay3{animation-delay:.9s;}
+
+@keyframes fadeUp{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <div id="login-screen">
-        <div class="login-box">
-            <img src="logo.jpg" alt="Prime FC Logo" class="login-logo">
-            <h2>Вход в клуб</h2>
-            <p style="color:#aaa; font-size: 14px;">Введите ваше имя игрока или фаната</p>
-            
-            <input type="text" id="username" placeholder="Ваше имя (например, Hasanov)">
-            <input type="password" id="password" placeholder="Пароль (любой)">
-            
-            <button class="login-btn" onclick="login()">ВОЙТИ</button>
-            <p id="error-msg" style="color:red; display:none; margin-top:10px;">Введите имя!</p>
-        </div>
+<nav>
+    <strong>PRIME FC</strong>
+    <div>
+        <a href="#team">Команда</a>
+        <a href="#matches">Матчи</a>
+        <a href="#kit">Форма</a>
+        <a href="#chat">Чат</a>
     </div>
+</nav>
 
-    <div id="main-site">
-        <nav>
-            <div style="font-weight:bold; font-size:20px;">PRIME FC</div>
-            <div class="user-profile">
-                <div class="avatar" id="user-avatar">?</div>
-                <div>
-                    <span id="display-name">Гость</span><br>
-                    <span class="logout-btn" onclick="logout()">Выйти</span>
-                </div>
-            </div>
-        </nav>
+<div class="hero">
+    <img src="logo.png" class="fade-up">
+    <h1 class="fade-up delay1">PRIME FC</h1>
+    <p class="slogan fade-up delay2">Мы стремимся быть в своём прайме</p>
+</div>
 
-        <div class="hero">
-            <img src="logo.jpg" width="120" style="margin-bottom:20px;">
-            <h1>Добро пожаловать</h1>
-            <p class="slogan">"Мы стремимся быть в своём прайме"</p>
-        </div>
+<h2 id="team" class="section-title fade-up">Состав</h2>
+<div class="roster">
+    <div class="player fade-up delay1"><div class="num">7</div><div class="name">Hasanov</div><div class="pos">Нападающий</div></div>
+    <div class="player fade-up delay2"><div class="num">6</div><div class="name">Mehraj</div><div class="pos">Защитник</div></div>
+    <div class="player fade-up delay3"><div class="num">10</div><div class="name">Bashirov</div><div class="pos">Полузащитник</div></div>
+    <div class="player fade-up delay1"><div class="num">5</div><div class="name">Qafarzade</div><div class="pos">Защитник</div></div>
+</div>
 
-        <h2 class="section-title">Состав Prime FC</h2>
-        <div class="roster-grid">
-            <div class="player-card">
-                <div class="p-num">7</div>
-                <div class="p-name">Hasanov</div>
-                <div class="p-pos">Нападающий</div>
-            </div>
-            <div class="player-card">
-                <div class="p-num">6</div>
-                <div class="p-name">Mehraj</div>
-                <div class="p-pos">Защитник</div>
-            </div>
-            <div class="player-card">
-                <div class="p-num">10</div>
-                <div class="p-name">Bashirov</div>
-                <div class="p-pos">Полузащитник</div>
-            </div>
-            <div class="player-card">
-                <div class="p-num">5</div>
-                <div class="p-name">Qafarzade</div>
-                <div class="p-pos">Защитник</div>
-            </div>
-        </div>
+<h2 id="matches" class="section-title fade-up">Матчи</h2>
+<div class="matches">
+    <div class="match fade-up"><div>Prime FC vs Aura FC</div><div class="score">2 : 2</div></div>
+    <div class="match fade-up"><div>Prime FC vs Aura FC</div><div class="score">1 : 4</div></div>
+    <div class="match fade-up"><div>Prime FC vs Aura FC</div><div class="score">2 : 3</div></div>
+</div>
 
-        <h2 class="section-title">Результаты</h2>
-        <div class="matches-container">
-            <div class="match-row">
-                <div>Prime FC vs Aura FC</div>
-                <div class="score">2 - 2</div>
-            </div>
-            <div class="match-row">
-                <div>Prime FC vs Aura FC</div>
-                <div class="score">1 - 4</div>
-            </div>
-            <div class="match-row">
-                <div>Prime FC vs Aura FC</div>
-                <div class="score">2 - 3</div>
-            </div>
-        </div>
+<h2 id="kit" class="section-title fade-up">Домашняя форма</h2>
+<div class="kit">
+    <img src="kit-home.png" class="fade-up delay1">
+    <p style="color:#aaa;">Домашняя форма Prime FC • Сезон 2025</p>
+</div>
+
+<h2 id="chat" class="section-title fade-up">Чат Prime FC</h2>
+<div class="chat-box fade-up">
+    <div class="chat-messages" id="messages"></div>
+    <div class="chat-input">
+        <input id="name" placeholder="Имя">
+        <input id="text" placeholder="Сообщение">
+        <button onclick="send()">Отправить</button>
     </div>
+</div>
 
-    <script>
-        // Проверяем, входил ли пользователь раньше
-        window.onload = function() {
-            const savedUser = localStorage.getItem('primeUser');
-            if (savedUser) {
-                showSite(savedUser);
-            }
-        };
+<script>
+const box=document.getElementById("messages");
+const chat=JSON.parse(localStorage.getItem("primeChat"))||[];
 
-        function login() {
-            const username = document.getElementById('username').value;
-            
-            if (username.trim() === "") {
-                document.getElementById('error-msg').style.display = 'block';
-                return;
-            }
+function render(){
+    box.innerHTML="";
+    chat.forEach(m=>{
+        box.innerHTML+=`<div class="msg"><span>${m.name}:</span> ${m.text}</div>`;
+    });
+    box.scrollTop=box.scrollHeight;
+}
+render();
 
-            // Сохраняем пользователя в памяти браузера
-            localStorage.setItem('primeUser', username);
-            showSite(username);
-        }
+function send(){
+    const name=document.getElementById("name").value||"Гость";
+    const text=document.getElementById("text").value;
+    if(!text)return;
+    chat.push({name,text});
+    localStorage.setItem("primeChat",JSON.stringify(chat));
+    document.getElementById("text").value="";
+    render();
+}
+</script>
 
-        function showSite(name) {
-            // Скрываем вход, показываем сайт
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('main-site').style.display = 'block';
-            
-            // Обновляем данные профиля
-            document.getElementById('display-name').innerText = name;
-            document.getElementById('user-avatar').innerText = name.charAt(0).toUpperCase();
-        }
-
-        function logout() {
-            localStorage.removeItem('primeUser');
-            location.reload(); // Перезагружаем страницу
-        }
-    </script>
 </body>
 </html>
