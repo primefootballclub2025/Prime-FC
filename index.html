@@ -15,6 +15,56 @@
 }
 
 *{box-sizing:border-box;}
+<div id="hasanModal" style="
+display:none;
+position:fixed;
+top:0; left:0;
+width:100%; height:100%;
+background:rgba(0,0,0,0.85);
+z-index:1000;
+align-items:center;
+justify-content:center;
+">
+
+<div style="
+background:#111;
+max-width:500px;
+padding:25px;
+border-radius:12px;
+border:2px solid var(--red);
+color:white;
+position:relative;
+">
+
+<span onclick="closeHasan()" style="
+position:absolute;
+top:10px;
+right:15px;
+cursor:pointer;
+font-size:20px;
+color:#aaa;
+">✕</span>
+
+<h2 style="text-align:center;margin-bottom:10px;">
+Hasan Hasanov <span style="color:var(--red);">© Капитан</span>
+</h2>
+
+<p><strong>Позиции:</strong> Нападающий, Вратарь</p>
+
+<p><strong>Достижения:</strong><br>
+— Бомбардир лиги сезона 24/25 (33 гола)<br>
+— Лучший ассистент лиги (12 ассистов)<br>
+— 2-е место в голосовании на «Золотой мяч» 23/24
+</p>
+
+<p><strong>Дата рождения:</strong> 01.12.2010</p>
+
+<p><strong>Роль в клубе:</strong> ключевая — один из лидеров команды</p>
+
+<p><strong>Трансферный статус:</strong> ———</p>
+
+</div>
+</div>
 
 body{
     margin:0;
@@ -199,6 +249,17 @@ nav a{
     font-weight:bold;
     cursor:pointer;
 }
+.captain{
+    border-top:3px solid var(--red);
+    box-shadow:0 0 15px rgba(198,32,38,0.6);
+    cursor:pointer;
+}
+
+.cap-badge{
+    color:var(--red);
+    font-weight:bold;
+    margin-left:4px;
+}
 </style>
 </head>
 
@@ -222,18 +283,15 @@ nav a{
 
 <h2 id="team" class="section-title">Состав Prime FC</h2>
 <div class="roster">
-    <div class="player">
-        <div class="num">7</div>
-        <div class="name">Hasan Hasanov</div>
-        <div class="pos">Нападающий</div>
-    </div>
 
+    <!-- ЗАЩИТНИК -->
     <div class="player">
         <div class="num">42</div>
         <div class="name">Elton Qafarzade</div>
         <div class="pos">Защитник</div>
     </div>
 
+    <!-- ПОЛУЗАЩИТНИКИ -->
     <div class="player">
         <div class="num">8</div>
         <div class="name">Mehraj Quluzade</div>
@@ -245,6 +303,16 @@ nav a{
         <div class="name">Azer Bashirov</div>
         <div class="pos">Полузащитник</div>
     </div>
+
+    <!-- НАПАДАЮЩИЙ / КАПИТАН -->
+    <div class="player captain" onclick="openHasan()">
+        <div class="num">7</div>
+        <div class="name">
+            Hasan Hasanov <span class="cap-badge">©</span>
+        </div>
+        <div class="pos">Нападающий</div>
+    </div>
+
 </div>
 
 <h2 id="match" class="section-title">Последний матч</h2>
@@ -297,7 +365,16 @@ function send(){
     document.getElementById("text").value="";
     render();
 }
+<script>
+function openHasan(){
+    document.getElementById("hasanModal").style.display="flex";
+}
+
+function closeHasan(){
+    document.getElementById("hasanModal").style.display="none";
+}
 </script>
 
 </body>
 </html>
+
